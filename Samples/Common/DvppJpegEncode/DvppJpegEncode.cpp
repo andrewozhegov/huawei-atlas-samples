@@ -60,13 +60,13 @@ HIAI_StatusT DvppJpegEncode::Encode(JpegEncodeIn& jpegInData, JpegEncodeOut& enc
     sJpegeOut outData;
     inData.width = CHECK_EVEN(jpegInData.inWidth);
     inData.height = CHECK_EVEN(jpegInData.inHeight);
-    inData.heightAligned = jpegInData.inHeight;
+    inData.heightAligned = ALIGN_UP(jpegInData.inHeight, ALIGN_16);
     inData.format = jpegInData.format;
     inData.level = jpegInData.level;
     printf("indata is %d %d %d %x\n", jpegInData.inWidth, jpegInData.inHeight, 
         jpegInData.inBufferSize, jpegInData.inBufferPtr.get()); 
     inData.stride = inData.format <= JPGENC_FORMAT_YUYV ? ALIGN_UP(inData.width * NUMBER_2, ALIGN_16) :
-        ALIGN_UP(inData.width, ALIGN_16);
+        ALIGN_UP(inData.width, ALIGN_128);
     inData.bufSize = inData.format <= JPGENC_FORMAT_YUYV ? 
         ALIGN_UP(inData.stride * inData.heightAligned, PAGE_SIZE) : 
         ALIGN_UP(inData.stride * inData.heightAligned * NUMBER_3 / NUMBER_2, PAGE_SIZE);
