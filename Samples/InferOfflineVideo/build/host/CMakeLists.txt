@@ -1,5 +1,7 @@
 project(host)
- 
+
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread")
+
 if(NOT DEFINED ENV{FFMPEG_PATH})
     message(FATAL_ERROR "please define environment variable:FFMPEG_PATH")  
 else()
