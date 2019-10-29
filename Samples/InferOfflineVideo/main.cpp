@@ -122,7 +122,7 @@ int main(int argc, char* argv[])
     std::thread threads[threads_n];
     for (uint32_t n = 0; n < threads_n; n++) {
         HIAI_StatusT ret;
-        threads[n] = std::thread([&ret, GRAPH_FILENAME, n](){
+        threads[n] = std::thread([&ret, n](){
             printf("%s %u \n", GRAPH_FILENAME[n].c_str(), n);
             ret = HIAI_InitAndStartGraph(GRAPH_FILENAME[n], n);
             if (ret != HIAI_OK) {
