@@ -14,7 +14,6 @@ checkEnvs
 checkArgs "$@"
 
 buildA300 $build_target $build_type $path_cur
-cp $path_cur/data/misc/humnoi_labels.txt $path_cur/out/humnoi_labels.txt
 
 sed 's/graph_id:.*/graph_id: 100/g' $path_cur/graph.config > $path_cur/out/graph0.config
 sed 's/graph_id:.*/graph_id: 101/g' $path_cur/graph.config > $path_cur/out/graph1.config
