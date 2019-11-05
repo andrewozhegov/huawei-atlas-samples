@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
     }
 
     // init Graph
-    uint32_t threads_n = 4;
+    uint32_t threads_n = 1;
     std::thread threads[threads_n];
     for (uint32_t n = 0; n < threads_n; n++) {
         HIAI_StatusT ret;
