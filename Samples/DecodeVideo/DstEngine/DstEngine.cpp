@@ -91,10 +91,11 @@ HIAI_IMPL_ENGINE_PROCESS("DstEngine", DstEngine, DST_INPUT_SIZE)
     }
 
     char path[OUT_PATH_MAX];
-    int ret = sprintf_s(path, OUT_PATH_MAX, "%s/h_%d_w_%d_channel%d_result_for_%s_%06d.yuv", outdir,
+    int ret = sprintf_s(path, OUT_PATH_MAX, "%s/h_%d_w_%d_channel%d_ctx%d_result_for_%s_%06d.yuv", outdir,
         result->info.height,
         result->info.width,
         result->info.channelId,
+        result->info.contextId,
         format.c_str(),
         outCnt++);
     if (ret <= 0) {

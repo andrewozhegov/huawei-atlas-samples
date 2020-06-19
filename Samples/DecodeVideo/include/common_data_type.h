@@ -42,6 +42,7 @@
 #endif
 
 struct StreamInfo {
+    uint64_t contextId;   /* frame id, in video stream channel */
     uint64_t frameId;   /* frame id, in video stream channel */
     uint32_t mode;      /* Operate mode: register, normal, decode H26**/
     uint32_t format;    /* raw data format: jpg, png, h264, h265 */
@@ -89,6 +90,7 @@ inline std::shared_ptr<void> GetStreamRawDataDearPtr(const char *ctrlPtr, const 
     std::shared_ptr<StreamRawData> engineTransPtr = std::make_shared<StreamRawData>();
     engineTransPtr->buf.bufferSize = ((StreamRawData *)ctrlPtr)->buf.bufferSize;
     engineTransPtr->buf.transBuff.reset((unsigned char *)dataPtr, hiai::Graph::ReleaseDataBuffer);
+    engineTransPtr->info.contextId = ((StreamRawData *)ctrlPtr)->info.contextId;
     engineTransPtr->info.frameId = ((StreamRawData *)ctrlPtr)->info.frameId;
     engineTransPtr->info.mode = ((StreamRawData *)ctrlPtr)->info.mode;
     engineTransPtr->info.format = ((StreamRawData *)ctrlPtr)->info.format;
@@ -106,7 +108,7 @@ inline std::shared_ptr<void> GetStreamRawDataDearPtr(const char *ctrlPtr, const 
 template<class Archive>
 void serialize(Archive &ar, StreamInfo &data)
 {
-    ar(data.frameId, data.mode, data.format, data.channelId, data.isEOS, data.width, data.height);
+    ar(data.contextId, data.frameId, data.mode, data.format, data.channelId, data.isEOS, data.width, data.height);
 }
 
 template<class Archive>

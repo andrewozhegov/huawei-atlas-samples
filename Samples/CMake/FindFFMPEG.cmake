@@ -29,6 +29,8 @@ Note that only components requested with `COMPONENTS` or `OPTIONAL_COMPONENTS`
 are guaranteed to set these variables or provide targets.
 #]==]
 
+set(FFMPEG_PATH "/home/HwHiAiUser/itv-ascend-decoder/AscendDvppRTSP/ffmpeg-4.2.1")
+
 if (DEFINED FFMPEG_PATH)
   set(CMAKE_LIBRARY_PATH ${FFMPEG_PATH}/lib)
   set(FFMPEG_INCLUDE_DIRS ${FFMPEG_PATH}/include)
@@ -45,7 +47,7 @@ foreach(component ${components})
     endif()
   endif()
 
-  find_library(${component}_library ${component})
+  find_library(${component}_library ${component}-codecpack-4.2.1 PATHS "${FFMPEG_PATH}/lib")
   if(${component}_library)
     list(APPEND FFMPEG_LIBRARIES ${${component}_library})
   endif()
